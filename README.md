@@ -16,36 +16,72 @@ We humbly thank the collective intelligence of humanity for providing the techno
 
 # Iterated Virtual Equipment
 
-**A strict-only Lean 4 formalization of iterated virtual double categories, walking globes, and energy-minimizing spirals**
+**An exploratory Lean 4 formalization inspired by public sketches on iterated virtual double categories and energy-minimizing geometric embeddings**
 
 [![Lean 4](https://img.shields.io/badge/Lean-4.24.0-blue.svg)](https://lean-lang.org)
 [![Mathlib](https://img.shields.io/badge/Mathlib-v4.24.0-purple.svg)](https://github.com/leanprover-community/mathlib4)
 [![Sorry Count](https://img.shields.io/badge/sorry-0-brightgreen.svg)](lean/ModalThesis/)
 [![License: Apoth3osis License Stack v1](https://img.shields.io/badge/License-Apoth3osis%20License%20Stack%20v1-blue.svg)](LICENSE.md)
 
-## Abstract
+<table>
+<tr>
+<td align="center" width="33%">
+<strong>2D Proof Map</strong><br/>
+<em>Pan, zoom, search declarations</em><br/>
+<a href="https://abraxas1010.github.io/infinity-modal_thesis/RESEARCHER_BUNDLE/artifacts/visuals/modal_thesis_2d.html">
+  <img src="RESEARCHER_BUNDLE/artifacts/visuals/modal_thesis_2d_preview.svg" alt="2D preview" width="100%"/>
+</a><br/>
+<a href="https://abraxas1010.github.io/infinity-modal_thesis/RESEARCHER_BUNDLE/artifacts/visuals/modal_thesis_2d.html">Open Interactive 2D</a>
+</td>
+<td align="center" width="33%">
+<strong>3D Proof Map</strong><br/>
+<em>Rotate, zoom, click nodes</em><br/>
+<a href="https://abraxas1010.github.io/infinity-modal_thesis/RESEARCHER_BUNDLE/artifacts/visuals/modal_thesis_3d.html">
+  <img src="RESEARCHER_BUNDLE/artifacts/visuals/modal_thesis_3d_preview.svg" alt="3D preview" width="100%"/>
+</a><br/>
+<a href="https://abraxas1010.github.io/infinity-modal_thesis/RESEARCHER_BUNDLE/artifacts/visuals/modal_thesis_3d.html">Open Interactive 3D</a>
+</td>
+<td align="center" width="33%">
+<strong>Spiral Embedding</strong><br/>
+<em>Energy-minimizing helix</em><br/>
+<a href="https://abraxas1010.github.io/infinity-modal_thesis/RESEARCHER_BUNDLE/artifacts/visuals/spiral_3d.html">
+  <img src="RESEARCHER_BUNDLE/artifacts/visuals/spiral_3d_preview.svg" alt="Spiral preview" width="100%"/>
+</a><br/>
+<a href="https://abraxas1010.github.io/infinity-modal_thesis/RESEARCHER_BUNDLE/artifacts/visuals/spiral_3d.html">Open Interactive Spiral</a>
+</td>
+</tr>
+</table>
 
-This repository provides a **minimal, self-validating** Lean 4 formalization exploring the intersection of:
+---
 
-- **Iterated virtual double categories** — data-only structures capturing virtual equipment semantics
-- **Walking k-globes** — explicit globular sets as presheaves on the globular indexing category
-- **Strict n-categories** — truncated higher categories with compositional laws at each dimension
-- **Energy-minimizing spirals** — a geometric interpretation where helical embeddings minimize discrete tension energy
+## Origin and Attribution
 
-The formalization deliberately adopts a **strict-only** approach: no higher inductive types, no univalence axioms, and all structures are decidable data. This makes the artifact fully executable and self-checking.
+This formalization is inspired by public sketches shared by a category theory researcher exploring ideas around:
 
-## Motivation
+- **Iterated virtual double categories** — nested categorical structures requiring multiple layers of meta-theory
+- **Walking k-globes** — formal objects `Gₙ` serving as "probes" into higher categories
+- **k-cells as maps** — the slogan "a k-cell is a map `Gₖ → Catₙ`"
+- **A thought experiment** — embedding highly-nested categorical data in 3D space while minimizing "tension"
 
-Consider the question: *What mathematical structure requires k layers of meta-theory to define?*
+The researcher noted that this spiral/DNA visual analogy is **"pure fantasy"** with respect to physics—atomic bonds are far too unstructured to carry the rich compositional data of virtual morphisms. We take this disclaimer seriously.
 
-In higher category theory, an n-cell lives in an iterated hom-space:
-```
-A_n : Cat(A_0, B_0), (A_1, B_1), ..., (A_{n-1}, B_{n-1})
-```
+### What This Formalization Attempts
 
-As n grows large, the data becomes increasingly nested. A thought experiment asks: *If we embed such a structure in 3D space while minimizing tension, what shape emerges?*
+We provide a **strict-only** Lean 4 artifact that:
 
-The answer—proved in this repository—is a **helix**. The XY-plane captures cells at each level, while the Z-axis represents iteration depth. We formalize this claim and prove that the helix achieves **zero energy** under our discrete tension measure.
+1. Formalizes the categorical structures as described (virtual equipment, globular sets, strict n-categories)
+2. Makes the "k-cell as globe-map" slogan literal and type-checkable
+3. Proves that a helix embedding achieves zero discrete tension energy under a specific measure
+
+### What This Does NOT Prove
+
+- Any connection to physical systems (DNA, atomic bonds, etc.)
+- That the tension measure captures anything physically meaningful
+- That these categorical structures have computational or physical applications
+
+This is an **exploratory mathematical formalization**. The potential for future computational or physical applications remains entirely speculative. We share it in the spirit of open research—perhaps these structures will prove useful in unexpected ways, or perhaps they will remain beautiful abstractions.
+
+---
 
 ## Quickstart
 
@@ -64,115 +100,99 @@ lake exe modal_thesis_spiral_dump -- --n 64 --step 0.35 --pitch 0.15 > docs/spir
 ./scripts/make_all_artifacts.sh
 ```
 
-Outputs are written under `docs/`.
+---
 
-## The Spiral Embedding
+## The Spiral Thought Experiment
 
-We expose a computable helix parameterization:
+The original idea: if you have categorical data nested k layers deep, and you try to embed it in 3D while minimizing some notion of "tension," what shape emerges?
 
+The parameterized helix:
 ```
 g(k) = (cos(step·k), sin(step·k), pitch·step·k)
 ```
 
-Generated visualizations:
+- **XY-plane**: cells at each iteration level (circular motion)
+- **Z-axis**: iteration depth (linear progression)
+
+We prove (in `SpiralEnergy.lean`) that this helix achieves **zero energy** under our discrete tension measure. This is a mathematical fact about our specific definitions—whether it says anything about reality is unknown.
 
 | 3D Helix | XY Projection |
 |----------|---------------|
-| ![Spiral g(k) in 3D](docs/spiral_g_3d.png) | ![Spiral g(k) XY](docs/spiral_g_xy.png) |
+| ![Spiral 3D](docs/spiral_g_3d.png) | ![Spiral XY](docs/spiral_g_xy.png) |
+
+---
 
 ## What Is Formalized
 
 ### Virtual Double Categories
 
-Data-only virtual double category and virtual equipment structures:
+Data-only structures (no composition laws yet):
 
 | Concept | Lean Module |
 |---------|-------------|
-| Virtual double category | `ModalThesis.IteratedVirtual.VirtualDoubleCategory` |
-| Virtual equipment | `ModalThesis.IteratedVirtual.VirtualEquipment` |
+| Virtual double category | `ModalThesis.IteratedVirtual.Basic` |
+| Virtual equipment | `ModalThesis.IteratedVirtual.Equipment` |
 
 ### Globular Sets and Walking Globes
-
-Two complementary formalizations:
-
-1. **Explicit model** — `Globe k` as a concrete globular set with `Fin 2` boundaries
-2. **Presheaf semantics** — `GlobularSetPsh := GlobularIndex^op ⥤ Type` with representable walking globes
 
 | Concept | Lean Module |
 |---------|-------------|
 | Globular indexing category | `ModalThesis.IteratedVirtual.GlobularIndex` |
-| Presheaf globular sets | `ModalThesis.IteratedVirtual.GlobularPresheaf` |
-| Walking globes | `ModalThesis.IteratedVirtual.Globe`, `GlobeN` |
+| Walking globes (explicit) | `ModalThesis.IteratedVirtual.Globe`, `GlobeN` |
+| Presheaf semantics | `ModalThesis.IteratedVirtual.GlobularPresheaf` |
 
-### Strict n-Categories and k-Cells
-
-The slogan "a k-cell is a map `G_k → Cat_n`" is made literal:
-
-| Concept | Lean Identifier |
-|---------|-----------------|
-| Strict n-category | `StrictNCategory n` |
-| Top n-cells as globe-maps | `StrictNCategory.CellTop` |
-| k-cells for k ≤ n | `StrictNCategory.kCell` |
-| Spiral as 22-cell | `spiral22Cell : GlobeN 22 ⟶ spiral22Cat.G` |
-
-### Energy Minimization (Proved)
-
-We define a nonnegative discrete tension energy and prove the helix achieves the global minimum:
-
-| Statement | Lean Identifier |
-|-----------|-----------------|
-| Tension energy at a point | `Point3R.tensionEnergyAt` |
-| Helix minimizes pointwise | `Point3R.helix_minimizes_pointwise` |
-| Helix minimizes over lists | `Point3R.helix_minimizes_list` |
-
-All proofs live in `lean/ModalThesis/IteratedVirtual/SpiralEnergy.lean`.
-
-### Cobordisms and Virtual Composition
-
-Cobordisms between parallel cells are formalized as witness structures with reflexivity and symmetry:
+### Strict n-Categories
 
 | Concept | Lean Module |
 |---------|-------------|
-| Cobordism witnesses | `ModalThesis.IteratedVirtual.Cobordism` |
-| Cobordism chains | `ModalThesis.IteratedVirtual.VirtualComposition` |
+| Strict n-category | `ModalThesis.IteratedVirtual.StrictN` |
+| Spiral as 22-cell | `ModalThesis.IteratedVirtual.SpiralStrict22` |
+
+### Energy Minimization
+
+| Statement | Lean Identifier |
+|-----------|-----------------|
+| Tension energy definition | `Point3R.tensionEnergyAt` |
+| Helix achieves zero energy | `Point3R.helix_minimizes_pointwise` |
+
+---
 
 ## Analysis Artifacts
 
-### UMAP Import Graph
+| Artifact | Description |
+|----------|-------------|
+| `docs/umap_imports_2d.png` | UMAP of module dependencies |
+| `docs/tactic_graph.png` | Tactic co-occurrence network |
+| `docs/spiral_points.json` | Helix coordinates (JSON) |
 
-Dimensionality reduction of the module dependency structure:
+---
 
-![UMAP imports 2D](docs/umap_imports_2d.png)
+## CT-Friendly Tools
 
-### Tactic Co-occurrence Graph
+For interactive globular/pasting-diagram work:
 
-Network analysis of proof tactics used across the formalization:
+| Tool | URL |
+|------|-----|
+| Globular | https://globular.science/ |
+| homotopy.io | https://homotopy.io/ |
+| Quiver | https://q.uiver.app/ |
 
-![Tactic graph](docs/tactic_graph.png)
-
-## CT-Friendly Diagram Tooling
-
-For interactive globular/pasting-diagram work (not bundled), we recommend:
-
-| Tool | Description | URL |
-|------|-------------|-----|
-| Globular | Interactive higher-category proof assistant | https://globular.science/ |
-| homotopy.io | Diagrams for higher category theory and HoTT | https://homotopy.io/ |
-| Quiver | Web editor for commutative diagrams (exports tikz-cd) | https://q.uiver.app/ |
+---
 
 ## Disclaimer
 
-This formalization is intentionally **strict-only** and does not claim to capture the full complexity of weak higher-categorical semantics. The physics analogy (spiral minimizing tension) is a thought experiment—we do not claim physical modeling of atomic bonds or biological structures.
+This formalization is **strict-only** and intentionally limited. It does not capture the full richness of weak higher-categorical semantics. The physics analogy is acknowledged as speculation by the original researcher, and we make no claims beyond the mathematical content.
 
-The artifact serves as a **proof of concept** demonstrating that:
-1. Iterated categorical structures can be formalized in Lean 4
-2. Walking globes admit explicit presheaf semantics
-3. Energy minimization claims can be machine-verified
+We offer this artifact as a starting point—a type-checked foundation that others might build upon, refine, or refute.
+
+---
 
 ## License
 
-This project is provided under the [Apoth3osis License Stack v1](LICENSE.md).
+[Apoth3osis License Stack v1](LICENSE.md)
+
+---
 
 ## Notes
 
-- This directory name contains Unicode (`∞-modal_thesis`). If any tooling struggles, clone/copy the repo into an ASCII path; the Lean code is independent of the folder name.
+- Directory name contains Unicode (`∞-modal_thesis`). Clone to ASCII path if tooling struggles.

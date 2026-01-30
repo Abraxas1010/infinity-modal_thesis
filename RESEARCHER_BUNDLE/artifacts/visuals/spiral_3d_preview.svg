@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <rect width="800" height="500" fill="#000000"/>
+
+  <text x="400" y="30" fill="#fbbf24" font-family="system-ui" font-size="16" text-anchor="middle" font-weight="600">
+    Energy-Minimizing Spiral (3D)
+  </text>
+
+  <!-- Axis lines -->
+  <g stroke="#1c2a3a" stroke-width="1" opacity="0.4">
+    <!-- X axis -->
+    <line x1="100" y1="350" x2="700" y2="350"/>
+    <!-- Y axis (going into page, shown as diagonal) -->
+    <line x1="400" y1="350" x2="300" y2="450"/>
+    <!-- Z axis (vertical) -->
+    <line x1="400" y1="350" x2="400" y2="80"/>
+  </g>
+
+  <!-- Axis labels -->
+  <text x="700" y="370" fill="#6b7d8c" font-family="system-ui" font-size="10">X (cos)</text>
+  <text x="280" y="465" fill="#6b7d8c" font-family="system-ui" font-size="10">Y (sin)</text>
+  <text x="410" y="90" fill="#6b7d8c" font-family="system-ui" font-size="10">Z (iteration)</text>
+
+  <!-- Unit circle projection (XY plane) -->
+  <ellipse cx="400" cy="380" rx="150" ry="50" fill="none" stroke="#3b82f6" stroke-width="1" opacity="0.2"/>
+
+  <!-- Helix spiral -->
+  <path d="M 550,350
+           C 540,320 480,280 400,270
+           C 320,260 280,290 270,320
+           C 260,350 290,380 350,390
+           C 410,400 470,370 490,340
+           C 510,310 470,270 420,250
+           C 370,230 310,250 290,280
+           C 270,310 280,350 320,370
+           C 360,390 420,380 460,350
+           C 500,320 490,280 450,250
+           C 410,220 350,220 310,240
+           C 270,260 260,300 280,330
+           C 300,360 350,380 400,370
+           C 450,360 480,330 480,290
+           C 480,250 440,220 390,210
+           C 340,200 290,220 270,250
+           C 250,280 260,320 290,350
+           C 320,380 380,390 420,370
+           C 460,350 480,310 470,270
+           C 460,230 410,200 360,190
+           C 310,180 260,200 240,230
+           C 220,260 230,300 260,330"
+        fill="none"
+        stroke="url(#spiralGradient)"
+        stroke-width="3"
+        stroke-linecap="round"/>
+
+  <!-- Gradient definition -->
+  <defs>
+    <linearGradient id="spiralGradient" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#fbbf24"/>
+      <stop offset="50%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#d97706"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Sample points on helix -->
+  <g fill="#fbbf24">
+    <circle cx="550" cy="350" r="4"/>
+    <circle cx="400" cy="270" r="4"/>
+    <circle cx="270" cy="320" r="4"/>
+    <circle cx="350" cy="390" r="4"/>
+    <circle cx="490" cy="340" r="4"/>
+    <circle cx="420" cy="250" r="4"/>
+    <circle cx="290" cy="280" r="4"/>
+    <circle cx="320" cy="370" r="4"/>
+    <circle cx="460" cy="350" r="4"/>
+    <circle cx="450" cy="250" r="4"/>
+    <circle cx="310" cy="240" r="4"/>
+    <circle cx="280" cy="330" r="4"/>
+  </g>
+
+  <!-- Info box -->
+  <g transform="translate(550, 60)">
+    <rect width="220" height="100" fill="#0a0a0a" stroke="#1c2a3a" rx="6"/>
+    <text x="10" y="20" fill="#fbbf24" font-family="system-ui" font-size="11" font-weight="600">Helix Parameters</text>
+    <text x="10" y="40" fill="#e6eef7" font-family="monospace" font-size="10">g(k) = (cos(t), sin(t), p*t)</text>
+    <text x="10" y="58" fill="#6b7d8c" font-family="system-ui" font-size="10">step = 0.35, pitch = 0.15</text>
+    <text x="10" y="76" fill="#6b7d8c" font-family="system-ui" font-size="10">n = 65 points</text>
+    <text x="10" y="90" fill="#4ade80" font-family="system-ui" font-size="9">Tension energy = 0 (proved)</text>
+  </g>
+
+  <text x="120" y="480" fill="#6b7d8c" font-family="system-ui" font-size="10">
+    Parameterized helix minimizing discrete tension energy
+  </text>
+</svg>

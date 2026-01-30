@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Iterated Virtual Equipment - Proof Map (2D)</title>
+  <style>
+    :root {
+      --bg: #000000;
+      --card: #0a0a0a;
+      --border: #1c2a3a;
+      --text: #e6eef7;
+      --dim: #6b7d8c;
+      --accent: #60a5fa;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow: hidden;
+      height: 100vh;
+    }
+    #container { position: relative; width: 100%; height: 100%; }
+    canvas { display: block; }
+    #controls {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
+      z-index: 100;
+      max-width: 300px;
+    }
+    #controls h1 {
+      font-size: 14px;
+      margin-bottom: 12px;
+      color: var(--accent);
+    }
+    #search {
+      width: 100%;
+      padding: 8px 12px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      color: var(--text);
+      font-size: 13px;
+      margin-bottom: 12px;
+    }
+    #search:focus { outline: none; border-color: var(--accent); }
+    #legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11px;
+      padding: 4px 8px;
+      background: var(--bg);
+      border-radius: 4px;
+      cursor: pointer;
+      opacity: 1;
+      transition: opacity 0.2s;
+    }
+    .legend-item.dimmed { opacity: 0.3; }
+    .legend-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+    #tooltip {
+      position: absolute;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 10px 14px;
+      font-size: 12px;
+      pointer-events: none;
+      display: none;
+      z-index: 200;
+      max-width: 300px;
+    }
+    #tooltip .name { font-weight: 600; color: var(--accent); }
+    #tooltip .kind { color: var(--dim); font-size: 11px; }
+    #tooltip .family { margin-top: 4px; }
+    #info {
+      position: absolute;
+      bottom: 16px;
+      right: 16px;
+      font-size: 11px;
+      color: var(--dim);
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <canvas id="canvas"></canvas>
+    <div id="controls">
+      <h1>Iterated Virtual Equipment</h1>
+      <input type="text" id="search" placeholder="Search declarations...">
+      <div id="legend"></div>
+    </div>
+    <div id="tooltip"></div>
+    <div id="info">Pan: drag | Zoom: scroll | Click legend to filter</div>
+  </div>
+  <script src="modal_thesis_proofs_data.js"></script>
+  <script>
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    const tooltip = document.getElementById('tooltip');
+    const searchInput = document.getElementById('search');
+    const legendDiv = document.getElementById('legend');
+
+    let width, height;
+    let offsetX = 0, offsetY = 0;
+    let scale = 1;
+    let isDragging = false;
+    let lastX, lastY;
+    let activeFamily = null;
+    let searchTerm = '';
+    let hoveredItem = null;
+
+    function resize() {
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = width * devicePixelRatio;
+      canvas.height = height * devicePixelRatio;
+      canvas.style.width = width + 'px';
+      canvas.style.height = height + 'px';
+      ctx.scale(devicePixelRatio, devicePixelRatio);
+      draw();
+    }
+
+    function toScreen(x, y) {
+      const padding = 100;
+      const sx = padding + x * (width - 2 * padding);
+      const sy = padding + y * (height - 2 * padding);
+      return [(sx + offsetX) * scale + width * (1 - scale) / 2,
+              (sy + offsetY) * scale + height * (1 - scale) / 2];
+    }
+
+    function draw() {
+      ctx.fillStyle = '#000000';
+      ctx.fillRect(0, 0, width, height);
+
+      ctx.strokeStyle = 'rgba(100, 120, 140, 0.2)';
+      ctx.lineWidth = 1;
+      for (const [i, j] of modalThesisData.edges) {
+        const a = modalThesisData.items[i];
+        const b = modalThesisData.items[j];
+        if (!a || !b) continue;
+        const [ax, ay] = toScreen(a.pos.x, a.pos.y);
+        const [bx, by] = toScreen(b.pos.x, b.pos.y);
+        ctx.beginPath();
+        ctx.moveTo(ax, ay);
+        ctx.lineTo(bx, by);
+        ctx.stroke();
+      }
+
+      for (let i = 0; i < modalThesisData.items.length; i++) {
+        const item = modalThesisData.items[i];
+        const [x, y] = toScreen(item.pos.x, item.pos.y);
+
+        let alpha = 1;
+        if (activeFamily && item.family !== activeFamily) alpha = 0.15;
+        if (searchTerm && !item.name.toLowerCase().includes(searchTerm.toLowerCase())) alpha = 0.1;
+
+        const color = familyColors[item.family] || '#888';
+        ctx.fillStyle = color;
+        ctx.globalAlpha = alpha;
+
+        const r = item.kind === 'theorem' || item.kind === 'structure' ? 6 : 4;
+        ctx.beginPath();
+        ctx.arc(x, y, r * scale, 0, Math.PI * 2);
+        ctx.fill();
+
+        if (hoveredItem === i) {
+          ctx.strokeStyle = '#fff';
+          ctx.lineWidth = 2;
+          ctx.stroke();
+        }
+      }
+      ctx.globalAlpha = 1;
+    }
+
+    function findItem(mx, my) {
+      for (let i = 0; i < modalThesisData.items.length; i++) {
+        const item = modalThesisData.items[i];
+        const [x, y] = toScreen(item.pos.x, item.pos.y);
+        const dist = Math.sqrt((mx - x) ** 2 + (my - y) ** 2);
+        if (dist < 10 * scale) return i;
+      }
+      return null;
+    }
+
+    function showTooltip(index, mx, my) {
+      const item = modalThesisData.items[index];
+      tooltip.innerHTML = `
+        <div class="name">${item.name}</div>
+        <div class="kind">${item.kind}</div>
+        <div class="family" style="color: ${familyColors[item.family]}">${item.family}</div>
+      `;
+      tooltip.style.display = 'block';
+      tooltip.style.left = (mx + 15) + 'px';
+      tooltip.style.top = (my + 15) + 'px';
+    }
+
+    function hideTooltip() {
+      tooltip.style.display = 'none';
+    }
+
+    const families = [...new Set(modalThesisData.items.map(i => i.family))];
+    families.forEach(f => {
+      const div = document.createElement('div');
+      div.className = 'legend-item';
+      div.innerHTML = `<span class="legend-dot" style="background: ${familyColors[f]}"></span>${f}`;
+      div.onclick = () => {
+        if (activeFamily === f) {
+          activeFamily = null;
+          document.querySelectorAll('.legend-item').forEach(el => el.classList.remove('dimmed'));
+        } else {
+          activeFamily = f;
+          document.querySelectorAll('.legend-item').forEach(el => {
+            el.classList.toggle('dimmed', !el.textContent.includes(f));
+          });
+        }
+        draw();
+      };
+      legendDiv.appendChild(div);
+    });
+
+    searchInput.oninput = () => {
+      searchTerm = searchInput.value;
+      draw();
+    };
+
+    canvas.onmousedown = e => {
+      isDragging = true;
+      lastX = e.clientX;
+      lastY = e.clientY;
+    };
+
+    canvas.onmousemove = e => {
+      if (isDragging) {
+        offsetX += (e.clientX - lastX) / scale;
+        offsetY += (e.clientY - lastY) / scale;
+        lastX = e.clientX;
+        lastY = e.clientY;
+        draw();
+      } else {
+        const idx = findItem(e.clientX, e.clientY);
+        if (idx !== hoveredItem) {
+          hoveredItem = idx;
+          draw();
+          if (idx !== null) showTooltip(idx, e.clientX, e.clientY);
+          else hideTooltip();
+        }
+      }
+    };
+
+    canvas.onmouseup = () => isDragging = false;
+    canvas.onmouseleave = () => { isDragging = false; hideTooltip(); };
+
+    canvas.onwheel = e => {
+      e.preventDefault();
+      const factor = e.deltaY > 0 ? 0.9 : 1.1;
+      scale = Math.max(0.5, Math.min(5, scale * factor));
+      draw();
+    };
+
+    window.onresize = resize;
+    resize();
+  </script>
+</body>
+</html>

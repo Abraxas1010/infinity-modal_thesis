@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Energy-Minimizing Spiral (3D)</title>
+  <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+  <style>
+    :root {
+      --bg: #000000;
+      --card: #0a0a0a;
+      --border: #1c2a3a;
+      --text: #e6eef7;
+      --accent: #fbbf24;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      height: 100vh;
+    }
+    #header {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
+      z-index: 100;
+      max-width: 320px;
+    }
+    #header h1 {
+      font-size: 14px;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+    #header p {
+      font-size: 11px;
+      color: #6b7d8c;
+      line-height: 1.5;
+    }
+    #header code {
+      background: #111;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-size: 10px;
+    }
+    #plot { width: 100%; height: 100vh; }
+  </style>
+</head>
+<body>
+  <div id="header">
+    <h1>Energy-Minimizing Spiral</h1>
+    <p>Parameterized helix: <code>g(k) = (cos(step*k), sin(step*k), pitch*step*k)</code></p>
+    <p style="margin-top: 8px;">XY-plane: cells at each iteration level<br>Z-axis: iteration depth (k)</p>
+    <p style="margin-top: 8px; font-size: 10px;">Rotate: drag | Zoom: scroll</p>
+  </div>
+  <div id="plot"></div>
+  <script>
+    // Helix parameters matching the Lean formalization
+    const n = 65;
+    const step = 0.35;
+    const pitch = 0.15;
+
+    const x = [], y = [], z = [];
+    for (let k = 0; k < n; k++) {
+      const t = step * k;
+      x.push(Math.cos(t));
+      y.push(Math.sin(t));
+      z.push(pitch * t);
+    }
+
+    // Color gradient along the spiral (iteration depth)
+    const colors = z.map((_, i) => i);
+
+    const spiralTrace = {
+      type: 'scatter3d',
+      mode: 'lines+markers',
+      name: 'Helix g(k)',
+      x: x,
+      y: y,
+      z: z,
+      line: {
+        color: colors,
+        colorscale: [[0, '#fbbf24'], [0.5, '#f59e0b'], [1, '#d97706']],
+        width: 4
+      },
+      marker: {
+        size: 4,
+        color: colors,
+        colorscale: [[0, '#fbbf24'], [0.5, '#f59e0b'], [1, '#d97706']],
+        opacity: 0.9
+      },
+      hovertemplate: 'k=%{customdata}<br>x=%{x:.3f}<br>y=%{y:.3f}<br>z=%{z:.3f}<extra></extra>',
+      customdata: Array.from({length: n}, (_, i) => i)
+    };
+
+    // Unit circle reference (XY projection)
+    const circleX = [], circleY = [], circleZ = [];
+    for (let i = 0; i <= 100; i++) {
+      const theta = (i / 100) * 2 * Math.PI;
+      circleX.push(Math.cos(theta));
+      circleY.push(Math.sin(theta));
+      circleZ.push(0);
+    }
+
+    const circleTrace = {
+      type: 'scatter3d',
+      mode: 'lines',
+      name: 'Unit circle (XY)',
+      x: circleX,
+      y: circleY,
+      z: circleZ,
+      line: { color: 'rgba(100, 150, 200, 0.3)', width: 1 },
+      hoverinfo: 'none'
+    };
+
+    // Z-axis reference
+    const axisTrace = {
+      type: 'scatter3d',
+      mode: 'lines',
+      name: 'Iteration axis (Z)',
+      x: [0, 0],
+      y: [0, 0],
+      z: [0, Math.max(...z) * 1.1],
+      line: { color: 'rgba(100, 150, 200, 0.3)', width: 1, dash: 'dash' },
+      hoverinfo: 'none'
+    };
+
+    Plotly.newPlot('plot', [spiralTrace, circleTrace, axisTrace], {
+      paper_bgcolor: '#000000',
+      plot_bgcolor: '#000000',
+      scene: {
+        xaxis: {
+          showgrid: true,
+          gridcolor: '#1c2a3a',
+          zerolinecolor: '#1c2a3a',
+          title: 'X (cos)',
+          range: [-1.5, 1.5]
+        },
+        yaxis: {
+          showgrid: true,
+          gridcolor: '#1c2a3a',
+          zerolinecolor: '#1c2a3a',
+          title: 'Y (sin)',
+          range: [-1.5, 1.5]
+        },
+        zaxis: {
+          showgrid: true,
+          gridcolor: '#1c2a3a',
+          zerolinecolor: '#1c2a3a',
+          title: 'Z (iteration)'
+        },
+        bgcolor: '#000000',
+        camera: {
+          eye: { x: 1.5, y: 1.5, z: 1.2 }
+        }
+      },
+      legend: {
+        x: 0.85,
+        y: 0.95,
+        bgcolor: 'rgba(10,10,10,0.8)',
+        bordercolor: '#1c2a3a',
+        font: { color: '#e6eef7' }
+      },
+      margin: { l: 0, r: 0, t: 0, b: 0 }
+    }, { responsive: true });
+  </script>
+</body>
+</html>

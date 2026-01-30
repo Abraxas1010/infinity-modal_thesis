@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Iterated Virtual Equipment - Proof Map (3D)</title>
+  <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+  <style>
+    :root {
+      --bg: #000000;
+      --card: #0a0a0a;
+      --border: #1c2a3a;
+      --text: #e6eef7;
+      --accent: #60a5fa;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      height: 100vh;
+    }
+    #header {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
+      z-index: 100;
+    }
+    #header h1 {
+      font-size: 14px;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+    #header p {
+      font-size: 11px;
+      color: #6b7d8c;
+    }
+    #plot { width: 100%; height: 100vh; }
+  </style>
+</head>
+<body>
+  <div id="header">
+    <h1>Iterated Virtual Equipment (3D)</h1>
+    <p>Rotate: drag | Zoom: scroll | Click nodes for info</p>
+  </div>
+  <div id="plot"></div>
+  <script src="modal_thesis_proofs_data.js"></script>
+  <script>
+    const items = modalThesisData.items;
+    const edges = modalThesisData.edges;
+
+    const traces = [];
+
+    // Group by family
+    const byFamily = {};
+    items.forEach((item, i) => {
+      if (!byFamily[item.family]) byFamily[item.family] = [];
+      byFamily[item.family].push({...item, index: i});
+    });
+
+    // Create trace per family
+    Object.entries(byFamily).forEach(([family, members]) => {
+      traces.push({
+        type: 'scatter3d',
+        mode: 'markers',
+        name: family,
+        x: members.map(m => m.pos.x),
+        y: members.map(m => m.pos.y),
+        z: members.map(m => m.pos.z),
+        text: members.map(m => `${m.name}<br>${m.kind}`),
+        hoverinfo: 'text',
+        marker: {
+          size: members.map(m => m.kind === 'theorem' || m.kind === 'structure' ? 8 : 5),
+          color: familyColors[family],
+          opacity: 0.9
+        }
+      });
+    });
+
+    // Add edges
+    const edgeX = [], edgeY = [], edgeZ = [];
+    edges.forEach(([i, j]) => {
+      const a = items[i], b = items[j];
+      if (a && b) {
+        edgeX.push(a.pos.x, b.pos.x, null);
+        edgeY.push(a.pos.y, b.pos.y, null);
+        edgeZ.push(a.pos.z, b.pos.z, null);
+      }
+    });
+
+    traces.push({
+      type: 'scatter3d',
+      mode: 'lines',
+      name: 'Dependencies',
+      x: edgeX,
+      y: edgeY,
+      z: edgeZ,
+      line: { color: 'rgba(100,120,140,0.3)', width: 1 },
+      hoverinfo: 'none'
+    });
+
+    Plotly.newPlot('plot', traces, {
+      paper_bgcolor: '#000000',
+      plot_bgcolor: '#000000',
+      scene: {
+        xaxis: { showgrid: true, gridcolor: '#1c2a3a', zerolinecolor: '#1c2a3a', title: '' },
+        yaxis: { showgrid: true, gridcolor: '#1c2a3a', zerolinecolor: '#1c2a3a', title: '' },
+        zaxis: { showgrid: true, gridcolor: '#1c2a3a', zerolinecolor: '#1c2a3a', title: '' },
+        bgcolor: '#000000'
+      },
+      legend: {
+        x: 0.85,
+        y: 0.95,
+        bgcolor: 'rgba(10,10,10,0.8)',
+        bordercolor: '#1c2a3a',
+        font: { color: '#e6eef7' }
+      },
+      margin: { l: 0, r: 0, t: 0, b: 0 }
+    }, { responsive: true });
+  </script>
+</body>
+</html>
