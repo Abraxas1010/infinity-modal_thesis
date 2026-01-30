@@ -60,3 +60,17 @@ Verification (HeytingLean):
 - Strict library build: `cd lean && lake build --wfail`
 - Executable builds: `./scripts/build_all_exes.sh --strict`
 - Happy-path runs: `./scripts/run_all_exes.sh`
+
+## 2026-01-30T17:04:29Z — Phase-8 progress: nontrivial bending/tension energy (strict-only)
+
+Motivation:
+- `SpiralEnergy.lean` proves “helix minimizes tension” for a *constraint energy* that is designed to be `0` on the helix.
+- For Phase‑8 we also want an energy that is **not** zero-by-definition, and a theorem that characterizes its minimizers.
+
+HeytingLean additions (strict-only):
+- `lean/HeytingLean/IteratedVirtual/BendingEnergy.lean`
+  - Discrete second-difference `Δ² p(k)` and bending energy `E(p, N) = ∑ ‖Δ² p(k)‖²`.
+  - Theorem: `bendingEnergy_eq_zero_iff_secondDiff_eq_zero` (energy `0` iff all second differences vanish).
+  - Theorem: `affine_on_prefix_of_secondDiff_eq_zero` (vanishing second differences ⇒ the curve is affine/straight on the prefix).
+- `lean/HeytingLean/Tests/IteratedVirtual/BendingEnergySanity.lean`
+  - Compile-only checks (including `zeroSeq` has energy `0`).
