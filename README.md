@@ -63,7 +63,7 @@ This formalization is inspired by public sketches shared by **Noah Chrein**, a c
 - **k-cells as maps** — the slogan "a k-cell is a map `Gₖ → Catₙ`"
 - **A thought experiment** — embedding highly-nested categorical data in 3D space while minimizing "tension"
 
-Noah Chrein noted that this spiral/DNA visual analogy is **"pure fantasy"** with respect to physics—atomic bonds are far too unstructured to carry the rich compositional data of virtual morphisms. We take this disclaimer seriously.
+Noah Chrein initially described the spiral/DNA visual analogy as speculative with respect to physics. That said, finding a structure that provably achieves zero tension energy for embedding high-dimensional categorical data seems interesting if nothing else.
 
 ### What This Formalization Attempts
 
@@ -73,13 +73,13 @@ We provide a **strict-only** Lean 4 artifact that:
 2. Makes the "k-cell as globe-map" slogan literal and type-checkable
 3. Proves that a helix embedding achieves zero discrete tension energy under a specific measure
 
-### What This Does NOT Prove
+### What Remains Open
 
-- Any connection to physical systems (DNA, atomic bonds, etc.)
-- That the tension measure captures anything physically meaningful
-- That these categorical structures have computational or physical applications
+- Whether the tension measure corresponds to anything physical
+- Whether these categorical structures have computational or physical applications
+- The connection, if any, to physical systems (DNA, atomic bonds, etc.)
 
-This is an **exploratory mathematical formalization**. The potential for future computational or physical applications remains entirely speculative. We share it in the spirit of open research—perhaps these structures will prove useful in unexpected ways, or perhaps they will remain beautiful abstractions.
+This is an **exploratory mathematical formalization**, far from complete. We share it in the spirit of open research—the helix achieving zero energy as the most efficient embedding structure for high-dimensional data may prove meaningful, or may remain a beautiful abstraction.
 
 ---
 
@@ -181,7 +181,7 @@ For interactive globular/pasting-diagram work:
 
 ## Disclaimer
 
-This formalization is **strict-only** and intentionally limited. It does not capture the full richness of weak higher-categorical semantics. The physics analogy is acknowledged as speculation by Noah Chrein, and we make no claims beyond the mathematical content.
+This formalization is **strict-only** and intentionally limited. It does not capture the full richness of weak higher-categorical semantics, and we make no claims beyond the mathematical content.
 
 We offer this artifact as a starting point—a type-checked foundation that others might build upon, refine, or refute.
 
