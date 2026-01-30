@@ -176,6 +176,8 @@ For interactive globular/pasting-diagram work:
 | Globular | https://globular.science/ |
 | homotopy.io | https://homotopy.io/ |
 | Quiver | https://q.uiver.app/ |
+| TikZiT | https://tikzit.github.io/ |
+| Catlab.jl | https://algebraicjulia.github.io/Catlab.jl/stable/ |
 
 ---
 
@@ -223,4 +225,4 @@ Append-only log (with timestamps):
   - Reproducibility note: HeytingLean pins a Mathlib-compatible fork of `Foundation` to ensure `lake build --wfail` succeeds.
 - **Helix adelic decomposition**: a strict local/global decomposition of the helix with correct periodicity under an explicit discretization assumption (`step = 2π/n`), aligning the “XY local / Z global” slogan with a provable statement.
 - **MR connection (closure/fixed points)**: the Rosen-style MR loop-closing operator is treated as an idempotent projection with an explicit fixed-point predicate (“organizational closure”).
-- **Heyting connection (stability transport)**: strict lemmas of the form “nucleus-commuting maps preserve fixed points”, used to state ‘helix preserves stability’ honestly under explicit hypotheses (without inventing a non-existent “equipment closure” field).
+- **Heyting connection (stability transport)**: strict lemmas of the form “nucleus-commuting maps preserve fixed points”, supporting the “virtualization” perspective: you can use the induced `a → c` without committing to a chosen composite proof `a → b → c` (until you actually need it).
