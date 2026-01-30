@@ -82,3 +82,16 @@ HeytingLean additions (strict-only):
   - Adds `GlobularSetPsh.toGlobularSet` so presheaf globular semantics can be consumed by legacy modules expecting
     the minimal `GlobularSet` record.
 - `lean/HeytingLean/Tests/IteratedVirtual/GlobularFromPresheafSanity.lean`
+
+## 2026-01-30T17:53:59Z — Phase-8 progress: structured globular sets → presheaf globular sets
+
+HeytingLean additions (strict-only):
+- `lean/HeytingLean/IteratedVirtual/GlobularToPresheaf.lean`
+  - Adds `GlobularSet.toPresheaf : GlobularSet → GlobularSetPsh`, complementing `toGlobularSet`.
+- `lean/HeytingLean/Tests/IteratedVirtual/GlobularToPresheafSanity.lean`
+  - Compile-only checks for `X.toPresheaf` and the round-trip `X.toPresheaf.toGlobularSet`.
+- `lean/HeytingLean/IteratedVirtual/GlobularPresheaf.lean`
+  - Makes `GlobularSetPsh` universe-polymorphic (`GlobularIndexᵒᵖ ⥤ Type u`) so conversions work for `GlobularSet.{u}`.
+
+Note:
+- We now have both directions as strict-only *bridges*; a proof-level equivalence/iso and round-trip simp lemmas remain Phase‑8 future work.
