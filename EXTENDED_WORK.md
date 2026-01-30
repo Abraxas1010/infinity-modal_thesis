@@ -94,9 +94,9 @@ HeytingLean additions (strict-only):
   - Makes `GlobularSetPsh` universe-polymorphic (`GlobularIndexᵒᵖ ⥤ Type u`) so conversions work for `GlobularSet.{u}`.
 
 Note:
-- We now have both directions as strict-only *bridges* and both round-trip isomorphisms.
-- Remaining Phase‑8 “future work” is to characterize the essential image of `GlobularSet.toPresheaf` inside
-  `GlobularIndexᵒᵖ ⥤ Type` for the current left-biased `GlobularIndex` composition encoding.
+- We now have both directions as strict-only *bridges*, both round-trip isomorphisms, and a category equivalence.
+- Remaining Phase‑8 “future work” is to replace/align `GlobularIndex` with the more standard “globe category”
+  presentation (generators + relations / quotient), and re-run the equivalence proof against that presentation.
 
 ## 2026-01-30T21:10:00Z — Phase-8 progress: strict `Catₙ` as presheaf + “top cell” as globe-map (strict-only)
 
@@ -127,3 +127,10 @@ HeytingLean additions (strict-only):
   - `GlobularSetPsh.toGlobularSet_toPresheafIso : (X.toGlobularSet).toPresheaf ≅ X`.
 - `lean/HeytingLean/Tests/IteratedVirtual/GlobularRoundTripPshSanity.lean`
   - Compile-only check: `(GlobePsh 3).toGlobularSet_toPresheafIso`.
+
+## 2026-01-30T19:50:04Z — Phase-8 progress: category equivalence `GlobularSet ≌ GlobularSetPsh` (strict-only)
+
+HeytingLean additions (strict-only):
+- `lean/HeytingLean/IteratedVirtual/GlobularEquivalence.lean`
+  - `globularSetEquivalence : GlobularSet ≌ GlobularSetPsh`.
+- `lean/HeytingLean/Tests/IteratedVirtual/GlobularEquivalenceSanity.lean`
