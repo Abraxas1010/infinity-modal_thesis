@@ -25,3 +25,12 @@ Notes:
 - We deliberately did **not** add a Lake dependency from this repo to HeytingLean, to avoid pulling in the full codebase.
 - Research-scale items from `WIP/extended_noah.txt` remain deferred until there is a scoped, strict-only plan.
 
+## 2026-01-30T02:18:00Z — Repo minimization: remove `WIP/`
+
+Change:
+- Removed the `WIP/` directory from this repo (to keep the repo minimal and clean for researchers).
+- Moved the append-only log to the repo root as `EXTENDED_WORK.md` (this file).
+
+Operational note:
+- The “Extended Work” section in `README.md` now describes the HeytingLean system-layer work in a unified way,
+  while this log continues to record what has been *actually landed* and where.
