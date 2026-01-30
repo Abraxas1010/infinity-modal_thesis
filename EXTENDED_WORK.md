@@ -74,3 +74,11 @@ HeytingLean additions (strict-only):
   - Theorem: `affine_on_prefix_of_secondDiff_eq_zero` (vanishing second differences ⇒ the curve is affine/straight on the prefix).
 - `lean/HeytingLean/Tests/IteratedVirtual/BendingEnergySanity.lean`
   - Compile-only checks (including `zeroSeq` has energy `0`).
+
+## 2026-01-30T17:06:42Z — Phase-8 progress: presheaf globular sets → structured globular sets
+
+HeytingLean additions (strict-only):
+- `lean/HeytingLean/IteratedVirtual/GlobularFromPresheaf.lean`
+  - Adds `GlobularSetPsh.toGlobularSet` so presheaf globular semantics can be consumed by legacy modules expecting
+    the minimal `GlobularSet` record.
+- `lean/HeytingLean/Tests/IteratedVirtual/GlobularFromPresheafSanity.lean`
