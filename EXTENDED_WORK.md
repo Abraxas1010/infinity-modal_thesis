@@ -95,3 +95,17 @@ HeytingLean additions (strict-only):
 
 Note:
 - We now have both directions as strict-only *bridges*; a proof-level equivalence/iso and round-trip simp lemmas remain Phase‑8 future work.
+
+## 2026-01-30T21:10:00Z — Phase-8 progress: strict `Catₙ` as presheaf + “top cell” as globe-map (strict-only)
+
+HeytingLean additions/changes (strict-only):
+- `lean/HeytingLean/IteratedVirtual/NGlobularToGlobularEmpty.lean`
+  - `NGlobularSet.toGlobularSetEmpty : NGlobularSet n → GlobularSet` by setting all cells above `n` to `PEmpty`.
+  - Avoids choosing “(n+1)-cells” just to talk about `n`-cells.
+- `lean/HeytingLean/IteratedVirtual/GlobularPresheaf.lean`
+  - `GlobePsh` now uses `uliftYoneda` so representables land in `Type u` even though `GlobularIndex` is small.
+- `lean/HeytingLean/IteratedVirtual/StrictNPresheaf.lean`
+  - `StrictNCategory.toPresheaf` views a strict `n`-category as a presheaf globular set.
+  - `cellTopPshOf` packages an `n`-cell as a map `GlobePsh n ⟶ C.toPresheaf` via `uliftYonedaEquiv`.
+- `lean/HeytingLean/Tests/IteratedVirtual/StrictNPresheafSanity.lean`
+  - Compile-only checks for `spiral22Cat` / `spiral22Params`.
