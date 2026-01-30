@@ -94,7 +94,9 @@ HeytingLean additions (strict-only):
   - Makes `GlobularSetPsh` universe-polymorphic (`GlobularIndexᵒᵖ ⥤ Type u`) so conversions work for `GlobularSet.{u}`.
 
 Note:
-- We now have both directions as strict-only *bridges*; a proof-level equivalence/iso and round-trip simp lemmas remain Phase‑8 future work.
+- We now have both directions as strict-only *bridges* and both round-trip isomorphisms.
+- Remaining Phase‑8 “future work” is to characterize the essential image of `GlobularSet.toPresheaf` inside
+  `GlobularIndexᵒᵖ ⥤ Type` for the current left-biased `GlobularIndex` composition encoding.
 
 ## 2026-01-30T21:10:00Z — Phase-8 progress: strict `Catₙ` as presheaf + “top cell” as globe-map (strict-only)
 
@@ -117,3 +119,11 @@ HeytingLean additions (strict-only):
   - `GlobularSet.toPresheaf_toGlobularSetIso : X.toPresheaf.toGlobularSet ≅ X`.
 - `lean/HeytingLean/Tests/IteratedVirtual/GlobularRoundTripSanity.lean`
   - Compile-only check: `(Globe 3).toPresheaf_toGlobularSetIso`.
+
+## 2026-01-30T19:36:21Z — Phase-8 progress: presheaf→structured→presheaf round-trip iso (strict-only)
+
+HeytingLean additions (strict-only):
+- `lean/HeytingLean/IteratedVirtual/GlobularRoundTripPsh.lean`
+  - `GlobularSetPsh.toGlobularSet_toPresheafIso : (X.toGlobularSet).toPresheaf ≅ X`.
+- `lean/HeytingLean/Tests/IteratedVirtual/GlobularRoundTripPshSanity.lean`
+  - Compile-only check: `(GlobePsh 3).toGlobularSet_toPresheafIso`.
