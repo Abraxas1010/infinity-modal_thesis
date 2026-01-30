@@ -196,3 +196,10 @@ We offer this artifact as a starting point—a type-checked foundation that othe
 ## Notes
 
 - Directory name contains Unicode (`∞-modal_thesis`). Clone to ASCII path if tooling struggles.
+
+---
+
+## Extended Work
+
+Append-only log (with timestamps) of post-delivery extensions and HeytingLean integration references:
+- `WIP/extended_work_log.md`
