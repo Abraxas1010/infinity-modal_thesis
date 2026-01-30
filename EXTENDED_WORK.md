@@ -146,3 +146,15 @@ HeytingLean additions (strict-only):
 
 Verification (HeytingLean):
 - Dev Mode QA: `./scripts/qa_dev.sh --files lean/HeytingLean/IteratedVirtual/GlobeCategoryPresented.lean lean/HeytingLean/Tests/IteratedVirtual/GlobeCategoryPresentedSanity.lean` PASSED.
+
+## 2026-01-30T20:46:34Z — Phase-8 progress: constrained minimization theorem for bending energy (strict-only)
+
+HeytingLean additions (strict-only):
+- `lean/HeytingLean/IteratedVirtual/BendingEnergyMinimization.lean`
+  - Defines `affineFrom01 a b` (affine extension from boundary points `p 0 = a`, `p 1 = b`).
+  - Proves a discrete constrained minimization + uniqueness theorem: under these boundary constraints, the unique
+    minimizer of `bendingEnergy` is `affineFrom01`.
+- `lean/HeytingLean/Tests/IteratedVirtual/BendingEnergyMinimizationSanity.lean`
+
+Verification (HeytingLean):
+- Dev Mode QA: `./scripts/qa_dev.sh --files lean/HeytingLean/IteratedVirtual/BendingEnergyMinimization.lean lean/HeytingLean/Tests/IteratedVirtual/BendingEnergyMinimizationSanity.lean` PASSED.
