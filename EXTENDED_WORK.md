@@ -158,3 +158,13 @@ HeytingLean additions (strict-only):
 
 Verification (HeytingLean):
 - Dev Mode QA: `./scripts/qa_dev.sh --files lean/HeytingLean/IteratedVirtual/BendingEnergyMinimization.lean lean/HeytingLean/Tests/IteratedVirtual/BendingEnergyMinimizationSanity.lean` PASSED.
+
+## 2026-01-30T20:52:30Z — Phase-8 progress: spiral 22-cell as a presheaf globe-map (strict-only)
+
+HeytingLean additions (strict-only):
+- `lean/HeytingLean/IteratedVirtual/SpiralStrict22Presheaf.lean`
+  - Exposes the spiral “22‑cell” as `GlobePsh 22 ⟶ spiral22Cat.toPresheaf` via `StrictNCategory.cellTopPshOf`.
+- `lean/HeytingLean/Tests/IteratedVirtual/SpiralStrict22PresheafSanity.lean`
+
+Verification (HeytingLean):
+- Dev Mode QA: `./scripts/qa_dev.sh --files lean/HeytingLean/IteratedVirtual/SpiralStrict22Presheaf.lean lean/HeytingLean/Tests/IteratedVirtual/SpiralStrict22PresheafSanity.lean` PASSED.
