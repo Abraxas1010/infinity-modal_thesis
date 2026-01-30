@@ -1,4 +1,234 @@
 {
-  "nodes": [],
-  "edges": []
+  "nodes": [
+    {
+      "id": "decide",
+      "count": 14
+    },
+    {
+      "id": "intro",
+      "count": 69
+    },
+    {
+      "id": "simp",
+      "count": 52
+    },
+    {
+      "id": "cases",
+      "count": 65
+    },
+    {
+      "id": "ring",
+      "count": 1
+    },
+    {
+      "id": "exact",
+      "count": 55
+    },
+    {
+      "id": "nlinarith",
+      "count": 3
+    },
+    {
+      "id": "induction",
+      "count": 6
+    },
+    {
+      "id": "by_cases",
+      "count": 11
+    },
+    {
+      "id": "apply",
+      "count": 9
+    },
+    {
+      "id": "linarith",
+      "count": 2
+    },
+    {
+      "id": "refine",
+      "count": 6
+    }
+  ],
+  "edges": [
+    {
+      "source": "decide",
+      "target": "by_cases",
+      "weight": 2
+    },
+    {
+      "source": "decide",
+      "target": "exact",
+      "weight": 2
+    },
+    {
+      "source": "decide",
+      "target": "intro",
+      "weight": 3
+    },
+    {
+      "source": "decide",
+      "target": "simp",
+      "weight": 2
+    },
+    {
+      "source": "intro",
+      "target": "exact",
+      "weight": 8
+    },
+    {
+      "source": "intro",
+      "target": "refine",
+      "weight": 3
+    },
+    {
+      "source": "intro",
+      "target": "simp",
+      "weight": 8
+    },
+    {
+      "source": "intro",
+      "target": "by_cases",
+      "weight": 3
+    },
+    {
+      "source": "intro",
+      "target": "cases",
+      "weight": 5
+    },
+    {
+      "source": "intro",
+      "target": "apply",
+      "weight": 2
+    },
+    {
+      "source": "intro",
+      "target": "induction",
+      "weight": 1
+    },
+    {
+      "source": "simp",
+      "target": "exact",
+      "weight": 6
+    },
+    {
+      "source": "simp",
+      "target": "refine",
+      "weight": 2
+    },
+    {
+      "source": "simp",
+      "target": "by_cases",
+      "weight": 2
+    },
+    {
+      "source": "simp",
+      "target": "cases",
+      "weight": 4
+    },
+    {
+      "source": "simp",
+      "target": "apply",
+      "weight": 2
+    },
+    {
+      "source": "simp",
+      "target": "induction",
+      "weight": 3
+    },
+    {
+      "source": "simp",
+      "target": "linarith",
+      "weight": 1
+    },
+    {
+      "source": "simp",
+      "target": "nlinarith",
+      "weight": 1
+    },
+    {
+      "source": "simp",
+      "target": "ring",
+      "weight": 1
+    },
+    {
+      "source": "cases",
+      "target": "exact",
+      "weight": 5
+    },
+    {
+      "source": "cases",
+      "target": "apply",
+      "weight": 2
+    },
+    {
+      "source": "cases",
+      "target": "by_cases",
+      "weight": 1
+    },
+    {
+      "source": "cases",
+      "target": "refine",
+      "weight": 2
+    },
+    {
+      "source": "ring",
+      "target": "induction",
+      "weight": 1
+    },
+    {
+      "source": "ring",
+      "target": "linarith",
+      "weight": 1
+    },
+    {
+      "source": "ring",
+      "target": "nlinarith",
+      "weight": 1
+    },
+    {
+      "source": "exact",
+      "target": "refine",
+      "weight": 3
+    },
+    {
+      "source": "exact",
+      "target": "by_cases",
+      "weight": 3
+    },
+    {
+      "source": "exact",
+      "target": "apply",
+      "weight": 2
+    },
+    {
+      "source": "nlinarith",
+      "target": "induction",
+      "weight": 1
+    },
+    {
+      "source": "nlinarith",
+      "target": "linarith",
+      "weight": 1
+    },
+    {
+      "source": "induction",
+      "target": "linarith",
+      "weight": 1
+    },
+    {
+      "source": "by_cases",
+      "target": "apply",
+      "weight": 1
+    },
+    {
+      "source": "by_cases",
+      "target": "refine",
+      "weight": 1
+    },
+    {
+      "source": "apply",
+      "target": "refine",
+      "weight": 1
+    }
+  ]
 }

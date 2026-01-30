@@ -29,7 +29,7 @@ TACTIC_TOKENS = [
     "apply",
 ]
 
-TACTIC_RE = re.compile(r"\\b(" + "|".join(re.escape(t) for t in TACTIC_TOKENS) + r")\\b")
+TACTIC_RE = re.compile(r"\b(" + "|".join(re.escape(t) for t in TACTIC_TOKENS) + r")\b")
 
 
 def extract_tactics_from_file(path: Path) -> list[str]:
