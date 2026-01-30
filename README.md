@@ -56,14 +56,14 @@ We humbly thank the collective intelligence of humanity for providing the techno
 
 ## Origin and Attribution
 
-This formalization is inspired by public sketches shared by a category theory researcher exploring ideas around:
+This formalization is inspired by public sketches shared by **Noah Chrein**, a category theory researcher exploring ideas around:
 
 - **Iterated virtual double categories** — nested categorical structures requiring multiple layers of meta-theory
 - **Walking k-globes** — formal objects `Gₙ` serving as "probes" into higher categories
 - **k-cells as maps** — the slogan "a k-cell is a map `Gₖ → Catₙ`"
 - **A thought experiment** — embedding highly-nested categorical data in 3D space while minimizing "tension"
 
-The researcher noted that this spiral/DNA visual analogy is **"pure fantasy"** with respect to physics—atomic bonds are far too unstructured to carry the rich compositional data of virtual morphisms. We take this disclaimer seriously.
+Noah Chrein noted that this spiral/DNA visual analogy is **"pure fantasy"** with respect to physics—atomic bonds are far too unstructured to carry the rich compositional data of virtual morphisms. We take this disclaimer seriously.
 
 ### What This Formalization Attempts
 
@@ -181,7 +181,7 @@ For interactive globular/pasting-diagram work:
 
 ## Disclaimer
 
-This formalization is **strict-only** and intentionally limited. It does not capture the full richness of weak higher-categorical semantics. The physics analogy is acknowledged as speculation by the original researcher, and we make no claims beyond the mathematical content.
+This formalization is **strict-only** and intentionally limited. It does not capture the full richness of weak higher-categorical semantics. The physics analogy is acknowledged as speculation by Noah Chrein, and we make no claims beyond the mathematical content.
 
 We offer this artifact as a starting point—a type-checked foundation that others might build upon, refine, or refute.
 
