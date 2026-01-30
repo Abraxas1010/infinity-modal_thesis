@@ -180,3 +180,14 @@ HeytingLean additions (strict-only):
 
 Verification (HeytingLean):
 - Dev Mode QA: `./scripts/qa_dev.sh --files lean/HeytingLean/IteratedVirtual/PastingFramed.lean lean/HeytingLean/Tests/IteratedVirtual/PastingFramedSanity.lean` PASSED.
+
+## 2026-01-30T21:02:35Z — Phase-8 status: remaining research-scale items
+
+Strict-only Phase‑8 items are now landed in HeytingLean (see the timestamped entries above).
+
+Remaining research-scale items (not yet landed):
+- Category equivalence between the presented globe category `GlobeCat` and the strict `GlobularIndex` surrogate, and a
+  rebase of the presheaf globular semantics onto `GlobeCat` as the base category.
+- An evaluation semantics for non-identity-framed pasting (beyond syntax-level substitution coherence), including an
+  interchange law for a chosen composition semantics of `V.Cell`.
+- A continuous (analysis-level) energy-minimization theorem (beyond the current strict-only discrete setting).
