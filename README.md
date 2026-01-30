@@ -219,6 +219,8 @@ Append-only log (with timestamps):
 - **Cobordisms as virtual morphisms**: cobordisms between k-cells and “virtual cells” as formal composites (chains), with strict coherence laws via category structure on chains.
 - **Coherence / pasting laws**: free (syntax-level) pasting of identity-framed virtual cells, with strict coherence as substitution laws (associativity + units).
 - **Spiral tension minimization**: a discrete, nonnegative tension energy functional where the helix achieves energy `0`, plus an `atTop` convergence statement (the “k→∞” reading).
+- **Presented globe category (`𝔾`)**: a standard generators+relations presentation of the globe category as a quotient of the free path category, plus a canonical functor into the existing strict `GlobularIndex` encoding (so downstream modules can migrate incrementally).
+- **Bending energy (nontrivial functional)**: a discrete second-difference energy `E(p,N)=∑‖Δ²p(k)‖²` with strict lemmas characterizing the zero-energy minimizers (affine/straight sequences on prefixes).
 - **Nucleus bridge from helix energy**: the helix tension energy is packaged as a fixed-point fact for a concrete nucleus on `WithBot ℝ`.
 - **(M,R) closure bridge**: a minimal β-style closure record and a strict constructor that produces a nucleus when given extensivity + meet-preservation.
 - **Modal bridge (syntax + companion)**: a lightweight modal-syntax sketch plus a strict Gödel-translation companion theorem sourced from the `Foundation` dependency (intuitionistic provability ↔ S4 provability of the Gödel translation).

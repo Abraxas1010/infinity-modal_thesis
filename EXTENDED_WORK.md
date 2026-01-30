@@ -134,3 +134,15 @@ HeytingLean additions (strict-only):
 - `lean/HeytingLean/IteratedVirtual/GlobularEquivalence.lean`
   - `globularSetEquivalence : GlobularSet ≌ GlobularSetPsh`.
 - `lean/HeytingLean/Tests/IteratedVirtual/GlobularEquivalenceSanity.lean`
+
+## 2026-01-30T20:39:27Z — Phase-8 progress: presented globe category (generators+relations) + map into `GlobularIndex` (strict-only)
+
+HeytingLean additions (strict-only):
+- `lean/HeytingLean/IteratedVirtual/GlobeCategoryPresented.lean`
+  - Presents the globe category `𝔾` as a quotient of the free path category on generators `σₙ, τₙ : n ⟶ n+1`,
+    with the standard globular relations.
+  - Provides `ToGlobularIndex.functor : GlobeCat ⥤ GlobularIndex.Obj` sending `σₙ ↦ src n`, `τₙ ↦ tgt n`.
+- `lean/HeytingLean/Tests/IteratedVirtual/GlobeCategoryPresentedSanity.lean`
+
+Verification (HeytingLean):
+- Dev Mode QA: `./scripts/qa_dev.sh --files lean/HeytingLean/IteratedVirtual/GlobeCategoryPresented.lean lean/HeytingLean/Tests/IteratedVirtual/GlobeCategoryPresentedSanity.lean` PASSED.
