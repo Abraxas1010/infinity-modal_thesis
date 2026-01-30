@@ -168,3 +168,15 @@ HeytingLean additions (strict-only):
 
 Verification (HeytingLean):
 - Dev Mode QA: `./scripts/qa_dev.sh --files lean/HeytingLean/IteratedVirtual/SpiralStrict22Presheaf.lean lean/HeytingLean/Tests/IteratedVirtual/SpiralStrict22PresheafSanity.lean` PASSED.
+
+## 2026-01-30T20:58:18Z — Phase-8 progress: non-identity-framed pasting syntax (strict-only)
+
+HeytingLean additions (strict-only):
+- `lean/HeytingLean/IteratedVirtual/PastingFramed.lean`
+  - Generalizes the free pasting syntax to allow internal nodes with arbitrary vertical boundaries (`V.Cell`), not just
+    identity-framed (“globular”) cells.
+  - Proves substitution coherence (`bind_assoc`, units).
+- `lean/HeytingLean/Tests/IteratedVirtual/PastingFramedSanity.lean`
+
+Verification (HeytingLean):
+- Dev Mode QA: `./scripts/qa_dev.sh --files lean/HeytingLean/IteratedVirtual/PastingFramed.lean lean/HeytingLean/Tests/IteratedVirtual/PastingFramedSanity.lean` PASSED.

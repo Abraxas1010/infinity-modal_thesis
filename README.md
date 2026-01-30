@@ -217,7 +217,7 @@ Append-only log (with timestamps):
 
 - **Iterated-virtual core**: strict-only `VirtualDoubleCategory`, `VirtualEquipment`, walking globes, presheaf globular semantics, strict `Catₙ`, and the spiral as a literal “22-cell” (a globe map into `Cat₂₂`).
 - **Cobordisms as virtual morphisms**: cobordisms between k-cells and “virtual cells” as formal composites (chains), with strict coherence laws via category structure on chains.
-- **Coherence / pasting laws**: free (syntax-level) pasting of identity-framed virtual cells, with strict coherence as substitution laws (associativity + units).
+- **Coherence / pasting laws**: free (syntax-level) pasting of virtual cells, both identity-framed (`Pasting`) and non-identity-framed (`PastingFramed`), with strict coherence as substitution laws (associativity + units).
 - **Spiral tension minimization**: a discrete, nonnegative tension energy functional where the helix achieves energy `0`, plus an `atTop` convergence statement (the “k→∞” reading).
 - **Presented globe category (`𝔾`)**: a standard generators+relations presentation of the globe category as a quotient of the free path category, plus a canonical functor into the existing strict `GlobularIndex` encoding (so downstream modules can migrate incrementally).
 - **Bending energy (nontrivial functional)**: a discrete second-difference energy `E(p,N)=∑‖Δ²p(k)‖²` with strict lemmas characterizing the zero-energy minimizers (affine/straight sequences), plus a constrained minimization+uniqueness theorem under boundary conditions (`p 0 = a`, `p 1 = b`).
