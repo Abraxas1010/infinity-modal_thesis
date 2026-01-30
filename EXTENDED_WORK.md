@@ -109,3 +109,11 @@ HeytingLean additions/changes (strict-only):
   - `cellTopPshOf` packages an `n`-cell as a map `GlobePsh n ⟶ C.toPresheaf` via `uliftYonedaEquiv`.
 - `lean/HeytingLean/Tests/IteratedVirtual/StrictNPresheafSanity.lean`
   - Compile-only checks for `spiral22Cat` / `spiral22Params`.
+
+## 2026-01-30T21:25:00Z — Phase-8 progress: structured→presheaf→structured round-trip iso (strict-only)
+
+HeytingLean additions (strict-only):
+- `lean/HeytingLean/IteratedVirtual/GlobularRoundTrip.lean`
+  - `GlobularSet.toPresheaf_toGlobularSetIso : X.toPresheaf.toGlobularSet ≅ X`.
+- `lean/HeytingLean/Tests/IteratedVirtual/GlobularRoundTripSanity.lean`
+  - Compile-only check: `(Globe 3).toPresheaf_toGlobularSetIso`.
