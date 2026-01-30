@@ -34,3 +34,29 @@ Change:
 Operational note:
 - The “Extended Work” section in `README.md` now describes the HeytingLean system-layer work in a unified way,
   while this log continues to record what has been *actually landed* and where.
+
+## 2026-01-30T15:11:04Z — Phase-7 completion in HeytingLean (GMT + pasting coherence + strict QA)
+
+HeytingLean repo:
+- `https://github.com/Abraxas1010/heyting` (branch: `bh-algebrair2-codegen`)
+
+New strict-only items landed (Lean file paths in HeytingLean):
+- `lean/HeytingLean/IteratedVirtual/Pasting.lean`
+  - Free pasting syntax for identity-framed virtual cells, with coherence as substitution laws
+    (`Pasting.bind_assoc`, `Pasting.bind_pure_right`).
+- `lean/HeytingLean/IteratedVirtual/Bridge/ModalCompanion.lean`
+  - Gödel–McKinsey–Tarski modal companion bridge at the **provability** level:
+    `Int ⊢ φ ↔ S4 ⊢ φᵍ`, re-exported from the `Foundation` library.
+
+Supporting bridge pieces also landed (strict-only):
+- `lean/HeytingLean/IteratedVirtual/Bridge/HelixAdelic.lean` (local/global decomposition + correct discrete periodicity when `step = 2π/n`)
+- `lean/HeytingLean/IteratedVirtual/Bridge/MRSystemConnection.lean` (MR loop closure as idempotent projection + fixed points)
+- `lean/HeytingLean/IteratedVirtual/Bridge/HeytingConnection.lean` (nucleus-commuting maps preserve fixed points)
+
+Reproducibility note:
+- `Foundation` was pinned to a fork/commit that is compatible with Mathlib `--wfail` (avoids a global name collision on `Matrix.map`).
+
+Verification (HeytingLean):
+- Strict library build: `cd lean && lake build --wfail`
+- Executable builds: `./scripts/build_all_exes.sh --strict`
+- Happy-path runs: `./scripts/run_all_exes.sh`

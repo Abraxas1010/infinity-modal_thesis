@@ -215,10 +215,12 @@ Append-only log (with timestamps):
 
 - **Iterated-virtual core**: strict-only `VirtualDoubleCategory`, `VirtualEquipment`, walking globes, presheaf globular semantics, strict `Catₙ`, and the spiral as a literal “22-cell” (a globe map into `Cat₂₂`).
 - **Cobordisms as virtual morphisms**: cobordisms between k-cells and “virtual cells” as formal composites (chains), with strict coherence laws via category structure on chains.
+- **Coherence / pasting laws**: free (syntax-level) pasting of identity-framed virtual cells, with strict coherence as substitution laws (associativity + units).
 - **Spiral tension minimization**: a discrete, nonnegative tension energy functional where the helix achieves energy `0`, plus an `atTop` convergence statement (the “k→∞” reading).
 - **Nucleus bridge from helix energy**: the helix tension energy is packaged as a fixed-point fact for a concrete nucleus on `WithBot ℝ`.
 - **(M,R) closure bridge**: a minimal β-style closure record and a strict constructor that produces a nucleus when given extensivity + meet-preservation.
 - **Modal bridge (syntax + companion)**: a lightweight modal-syntax sketch plus a strict Gödel-translation companion theorem sourced from the `Foundation` dependency (intuitionistic provability ↔ S4 provability of the Gödel translation).
+  - Reproducibility note: HeytingLean pins a Mathlib-compatible fork of `Foundation` to ensure `lake build --wfail` succeeds.
 - **Helix adelic decomposition**: a strict local/global decomposition of the helix with correct periodicity under an explicit discretization assumption (`step = 2π/n`), aligning the “XY local / Z global” slogan with a provable statement.
 - **MR connection (closure/fixed points)**: the Rosen-style MR loop-closing operator is treated as an idempotent projection with an explicit fixed-point predicate (“organizational closure”).
 - **Heyting connection (stability transport)**: strict lemmas of the form “nucleus-commuting maps preserve fixed points”, used to state ‘helix preserves stability’ honestly under explicit hypotheses (without inventing a non-existent “equipment closure” field).
